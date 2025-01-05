@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title','staff detail')
+@section('title','config detail')
 @section('content')
 
 
-<form method="post" action="{{url('staff/update/'.$staffinfos->id)}}">
+<form method="post" action="{{url('config/update/'.$configs->id)}}">
 @method('put')
 @csrf
 
@@ -11,70 +11,81 @@
 
 
 <div class="container">
-    <br>
+@if($errors->any())
+
+<div class="alert alert-warning">
+    <ol>
+        @foreach($errors->all() as $error)
+            <li>{{$error}}</li>
+        @endforeach
+    </ol>
+</div>
+@endif
+<br>
+
     <div class="row" >
         <div class="col">
             
         
-            <h1 >Staff Edit</h1>
+            <h1 >Config Edit</h1>
         </div>
         
     </div>
   
         <div class= "row" >
 
-            <div class="col-md-6">
-                <lable class="form-label">ID : can't edit</lable>
-                <input type="text" class="form-control" name="id" value="{{$staffinfos->id}}" readonly>
-            </div>
-            <div class="col-md-6">
-                <lable class="form-label">Name </lable>
-                <input type="text" class="form-control" name="name" value="{{$staffinfos->name}}" >
+        <div class="col-md-6">
+                <lable class="form-label">ID : Can't change</lable>
+                <input type="text" class="form-control" name="id"
+                value="{{$configs->id}}" readonly>
+        </div>
+
+        <div class="col-md-6">
+                <lable class="form-label">Config Data</lable>
+                <input type="text" class="form-control" name="configkey"
+                value="{{$configs->configkey}}">
             </div>
 
             <div class="col-md-6">
-                <lable class="form-label">Email</lable>
-                <input type="email" class="form-control" name="email" value="{{$staffinfos->email}}">
+                <lable class="form-label">Name</lable>
+                <input type="text" class="form-control" name="name"
+                value="{{$configs->name}}"  >
             </div>
+
+           
             <div class="col-md-6">
-                <lable class="form-label">Phone</lable>
-                <input type="text" class="form-control" name="phone" value="{{$staffinfos->phone}}"> 
+                <lable class="form-label">Description</lable>
+                <input type="text" class="form-control" name="description"
+                value="{{$configs->description}}" >
             </div>
 
             <div class="col-md-6">
-                <lable class="form-label">Designation </lable>
-                <!-- <input type="text" class="form-control" name="designation" value="{{$staffinfos->designation}}"> -->
-                
-                <select class="form-select" name="designation" value="{{$staffinfos->designation}}">
-                @foreach($designations as $designation)
-				<option value="{{ $designation['desname'] }}">
-					{{ $designation['desname'] }}
-				</option>
-				@endforeach
-			</select>
-            
-
+                <lable class="form-label">Status</lable>
+                <select class="form form-select" name="isActive" id="isActive"
+                value="{{$configs->isActive}}" >
+                    <option value="1" name="isActive" id="1">
+                    Active
+                    </option>
+                    <option value="1" name="isActive" id="2">
+                    Inactive
+                    </option>
+                </select>
+               
             </div>
-            <div class="col-md-6">
-                <lable class="form-label">Department</lable>
-                <input type="text" class="form-control" name="department" value="{{$staffinfos->department}}">
-            </div>
+   
 
             <div class="col-md-6">
                 <lable class="form-label">Remark </lable>
-                <input type="remark" class="form-control" name="remark" value="{{$staffinfos->remark}}">
+                <input type="text" class="form-control" name="remark"
+                value="{{$configs->remark}}" >
             </div>
 
         </div>  
-    <div class="row-md-12">
-        <lable class="form-label"> Address</lable>
-        <input type="text" class="form-control" name="address" value="{{$staffinfos->address}}">
-        <br>
-    </div> 
 
     <div class="row justify-content-md-center ">
+
         <div class="col-md-3">
-            
+            <br>
             <button class="btn btn-success" type="submit" > Update</button>
             <button class="btn btn-secondary" type="reset">Reset</button>
         </div>
@@ -85,7 +96,7 @@
         <div class="col-md-2">
                
                <br>
-        <a href="/staff/dashboard"><h6>Staff Lists</h6></a>
+        <a href="/config/dashboard"><h6>config Lists</h6></a>
         </div>
         
     </div>

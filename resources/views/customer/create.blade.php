@@ -16,7 +16,7 @@
 			</ol>
 
 		</div>
-		@endif
+@endif
 <div class="container">
     <br>
     <div class="row" >
@@ -33,61 +33,36 @@
     
             <div class="col-md-6">
                 <lable class="form-label">Customer ID</lable>
-                <input type="text" class="form-control" name="customer_id">
+                <input type="integer" class="form-control" name="customer_id" min="7770" max="99999">
             </div>
 
             <div class="col-md-6">
                 <lable class="form-label">Name</lable>
                 <input type="name" class="form-control" name="name">
             </div>
+
             <div class="col-md-6">
                 <lable class="form-label">Phone</lable>
-                <input type="text" class="form-control" name="phone">
+                <input type="phone" class="form-control" name="phone" minlength="11" maxlength="11">
             </div>
+
+            <div class="col-md-6">
+                <lable class="form-label">Email</lable>
+                <input type="email" class="form-control" name="email">
+            </div>
+
             <div class="col-md-6">
                 <lable class="form-label">Status</lable>
-                <input type="text" class="form-control" name="status">
-            </div>
-            <div class="col-md-6">
-                <lable class="form-label">House No</lable>
-                <input type="text" class="form-control" name="house_no">
-            </div>
-
-            <div class="col-md-6">
-                <lable class="form-label">Street</lable>
-                <input type="text" class="form-control" name="street">
-            </div>
-            <div class="col-md-6">
-                <lable class="form-label">Ward</lable>
-                <input type="text" class="form-control" name="ward">
-            </div>
-            <div class="col-md-6">
-                <lable class="form-label">Township</lable>
-                <input type="text" class="form-control" name="township">
-            </div>
-            <div class="col-md-6">
-                <lable class="form-label">City</lable>
-                <input type="text" class="form-control" name="city">
-            </div>
-            <div class="col-md-6">
-                <lable class="form-label">Village Ward</lable>
-                <input type="text" class="form-control" name="village_ward">
-            </div>
-            <div class="col-md-6">
-                <lable class="form-label">Village</lable>
-                <input type="text" class="form-control" name="village">
-            </div>
-            <div class="col-md-6">
-                <lable class="form-label">Map Location</lable>
-                <input type="text" class="form-control" name="geo_location">
+                <!-- <input type="text" class="form-control" name="status"> -->
+                 <select  class="form-select" name="status" id="status">
+                    @foreach ($isactives as $isactive )
+                    <option value="{{$isactive['status_name']}}">
+                        {{$isactive['status_name']}}
+                    </option>
+                    @endforeach
+                 </select>
             </div>
 
-            <div class="col-md-6">
-                <lable class="form-label">Config ID</lable>
-                <input type="text" class="form-control" name="config_id">
-            </div>
-
-          
             <div class="col-md-6">
                 <lable class="form-label">Service Staff </lable>
                 <select class="form-select" name="staff_id">
@@ -99,13 +74,95 @@
 			</select>
             </div>
 
+
+<br>
+<br>
+
+<!-- testtting radio start -->
+
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  
+  <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+
+<p>hello</p>
+
+</div>
+
+
+
+
+<div class="row">
+<div class="col-md-6">
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="$flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+    Rual
+  </label>
+
+</div>
+</div>
+<div class="col-md-6">
+
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="$flexRadioDefault1" checked>
+  <label class="form-check-label" for="flexRadioDefault1">
+    Remote
+  </label>
+</div>
+</div>
+</div>
+
+
+<!-- testing radio end -->
+            <div class="col-md-6">
+                <lable class="form-label">House No</lable>
+                <input type="text" class="form-control" name="house_no">
+            </div>
+
+            <div class="col-md-6">
+                <lable class="form-label">Street</lable>
+                <input type="text" class="form-control" name="street">
+            </div>
+
+            <div class="col-md-6">
+                <lable class="form-label">Ward</lable>
+                <input type="text" class="form-control" name="ward">
+            </div>
+
+            <div class="col-md-6">
+                <lable class="form-label">Township</lable>
+                <input type="text" class="form-control" name="township">
+            </div>
+
+            <div class="col-md-6">
+                <lable class="form-label">City</lable>
+                <input type="text" class="form-control" name="city">
+            </div>
+
+            <div class="col-md-6">
+                <lable class="form-label">Village Ward</lable>
+                <input type="text" class="form-control" name="village_ward">
+            </div>
+
+            <div class="col-md-6">
+                <lable class="form-label">Village</lable>
+                <input type="text" class="form-control" name="village">
+            </div>
+            
+            <div class="col-md-6">
+                <lable class="form-label">Map Location</lable>
+                <input type="text" class="form-control" name="geo_location">
+            </div>
+
+            <div class="col-md-6">
+                <lable class="form-label">Config ID</lable>
+                <input type="text" class="form-control" name="config_id">
+            </div>
+
+          
            
 
-
-           
-
-         
-    
 
     <div class="row justify-content-md-center ">
         <div class="col-md-3">
@@ -126,6 +183,6 @@
         
     </div>
    
-</div>
+
 </form>
 @endsection

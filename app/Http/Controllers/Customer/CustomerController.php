@@ -19,6 +19,7 @@ class CustomerController extends Controller
         'customer_id'=>'required',
         'name'=>'required',
         'phone'=>'required',
+        //'email'=>'required',
         'status'=>'required',
         'house_no'=>'required',
         'street'=>'required',
@@ -45,6 +46,7 @@ class CustomerController extends Controller
         $customer->customer_id=request()->customer_id;
         $customer->name=request()->name;
         $customer->phone=request()->phone;
+        // $customer->email=request()->email;
         $customer->status=request()->status;
         $customer->house_no=request()->house_no;
         $customer->street=request()->street;
@@ -63,13 +65,20 @@ class CustomerController extends Controller
     }
     
 
-    // public function detail($id)
-    // {
+    public function detail($id)
+  {
         
-    //     $data=Customer::find($id);
-    //     return view('customer/detail',['customers'=>$data]);      
+        $data=Customer::find($id);
+        $isactive=
+        [
+          ['status_id'=>1,'status_name'=>"Active"],
+          ['status_id'=>1,'status_name'=>"InActive"],
+        ];
+
+        $staffs=Staff::all();
+        return view('customer/detail',['customers'=>$data,'isacives'=>$isactive,'staffs'=>$staffs]);      
           
-    // }
+    }
 
     public function update(Request $request,$id)
     {      
@@ -88,19 +97,28 @@ class CustomerController extends Controller
        
                   
               
-    //                 $customer=Customer::find($id);
-    //                 $customer->name=$request->name;
-    //                 $customer->email=$request->email;
-    //                 $customer->phone=$request->phone;
-    //                 $customer->designation=$request->designation;
-    //                 $customer->department=$request->department;
-    //                 $customer->remark=$request->remark;
-    //                 $customer->address=$request->address;
-    //                 $result=$customer->update();
+                    $customer=Customer::find($id);
+                    $customer->customer_id=request()->customer_id;
+                    $customer->name=request()->name;
+                    $customer->phone=request()->phone;
+                    // $customer->email=request()->email;
+                    $customer->status=request()->status;
+                    $customer->house_no=request()->house_no;
+                    $customer->street=request()->street;
+                    $customer->ward=request()->ward;
+                    $customer->township=request()->township;
+                    $customer->city=request()->city;
+                    $customer->village_ward=request()->village_ward;
+                    $customer->village=request()->village;
+                    $customer->geo_location=request()->geo_location;
+                    $customer->staff_id=request()->staff_id;
+                    $customer->config_id=request()->config_id;
+                    $result=$customer->update();
+                    // dd($result);
                 
     // if($result)
     // {
-    //   return redirect('customer/dashboard')->with("update Successully");
+     return redirect('customer/dashboard')->with("update Successully");
     // }
        
     // else
@@ -137,7 +155,22 @@ class CustomerController extends Controller
     public function staffdata()
     {
       $data=Staff::all();
-      return view('customer/create',['staffs'=>$data]);
+      $isactive=
+        [
+          ['status_id'=>1,'status_name'=>"Active"],
+          ['status_id'=>1,'status_name'=>"InActive"],
+        ];
+      return view('customer/create',['staffs'=>$data,'isactives'=>$isactive]);
 
     }
+
+    // public function isactive()
+    // {
+    //   $isactive=
+    //     [
+    //       ['status_id'=>1,'status_name'=>"Active"],
+    //       ['status_id'=>1,'status_name'=>"InActive"],
+    //     ];
+    //   return view('customer/create',['isactives'=>$isactive]) ;   
+    // }
 }

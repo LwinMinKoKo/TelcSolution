@@ -3,16 +3,15 @@
 
 @section('content')
 <div class="container">
+@if(session('info'))
+<div class="alert alert-info">
+  {{session('info')}}
+</div>
 
+
+@endif
 	
-
-
-	<!-- @if(session('info'))
-	<div class="alert alert-info">
-		{{ session('info') }}
-	</div>
-	@endif -->
-  <a class="btn sm btn-primary" href="/product/create" > +  Add New Product</a><br><br>
+	  <a class="btn sm btn-primary" href="/product/create" > +  Add New Product</a><br><br>
 <table class="table table-bordered">
 
   <thead>
@@ -30,12 +29,12 @@
   </thead>
 
   
-@foreach ($products as $product )
 
 
-
-     <tbody>
+  <tbody>
+ 
     <tr>
+    @foreach ($products as $product )
       <th scope="row">{{$product->id}}</th>
       <td>{{$product->name}}</td>
       <td>{{$product->bandwidth}}</td>

@@ -6,6 +6,8 @@
 
 <form method="post" >
 @csrf
+
+<div class="container">
 @if($errors->any())
 		<div class="alert alert-warning">
 			
@@ -16,8 +18,7 @@
 			</ol>
 
 		</div>
-		@endif
-<div class="container">
+@endif
     <br>
     <div class="row" >
         <div class="col">
@@ -42,7 +43,7 @@
             </div>
             <div class="col-md-6">
                 <lable class="form-label">Phone</lable>
-                <input type="text" class="form-control" name="phone">
+                <input type="phone" class="form-control" name="phone" maxlength="11" minlength="11">
             </div>
 
             <div class="col-md-6">

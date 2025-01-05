@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','product detail')
+@section('title','Product detail')
 @section('content')
 
 
@@ -11,6 +11,15 @@
 
 
 <div class="container">
+@if ($errors->any())
+<div class="alert alert-warning">
+    <ol>
+        @foreach ($errors->all() as $error )
+        <li>{{$error}}</li>
+        @endforeach 
+    </ol>
+</div>
+@endif
     <br>
     <div class="row" >
         <div class="col">
@@ -44,13 +53,20 @@
             </div>
             <div class="col-md-6">
                 <lable class="form-label">Status</lable>
-                <input type="text" class="form-control" name="status" value="{{$products->isActive}}"> 
-                <br>
+                <!-- <input type="text" class="form-control" name="isActive" value="{{$products->isActive}}">  -->
+                <select name="isActive" id="isActive" class="form form-select" value="{{$products->isActive}}">
+                    <option value="1" name="isActive" >
+                        Active
+                    </option>
+                    <option value="0" name="isActive" >
+                        Inactive
+                    </option>
+                </select>
             </div>
             <div class="col-md-6">
                 <lable class="form-label">Price</lable>
-                <input type="text" class="form-control" name="status" value="{{$products->price}}"> 
-                <br>
+                <input type="text" class="form-control" name="price" value="{{$products->price}}"> 
+                
             </div>
 
               

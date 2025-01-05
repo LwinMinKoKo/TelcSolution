@@ -2,11 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 use App\Http\Controllers\Collection\CollectionController;
 use App\Http\Controllers\Staff\StaffController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Config\ConfigController;
+use App\Http\Controllers\File\FileController;
+
 
 
 Route::get('/', function () {
@@ -16,10 +19,11 @@ Route::get('/', function () {
 /** Start of Collection Route */
 
 Route::get('/collection/filesupload',[CollectionController::class,'filesupload']);
-
-
-
-
+Route::post('/collection/filesupload',[CollectionController::class,'filesupload_post']);
+Route::get('/collection/create',[CollectionController::class,'create'])->name('collection.create');
+Route::get('/collection/dashboard',[CollectionController::class,'dashboard'])->name('collection.dashboard');
+Route::get('/collection/add-collection/{id}',[CollectionController::class,'addCollection']);
+Route::post('/collection/add-collection/{id}',[CollectionController::class,'collectionCalculation']);
 /** End of Collection Route */
 
 
@@ -54,7 +58,7 @@ Route::put('/product/update/{id}',[ProductController::class,'update'])->name('pr
 /** Start of Customer Route */
 
 Route::post('/customer/create',[CustomerController::class,'create'])->name('customer.create');
-Route::get('/customer/create',[CustomerController::class,'staffdata'])->name('customer.create');
+Route::get('/customer/create',[CustomerController::class,'staffdata','isactive'])->name('customer.createdata');
 
 
 Route::get('/customer/dashboard',[CustomerController::class,'dashboard'])->name('customer.index');
@@ -67,11 +71,12 @@ Route::get('/customer/show',[CustomerController::class,'show'])->name('customer.
 
 
 
-/** Start of Coonfig Route */
+/** Start of Config Route */
 
-// Route::post('/config/create',[ConfigController::class,'create'])->name('config.create');
+
+Route::post('/config/create',[ConfigController::class,'store'])->name('config.create');
 Route::get('/config/create',[ConfigController::class,'create'])->name('config.create');
-Route::get('/config/dashboard',[ConfigController::class,'dashboard'])->name('config.index');
+Route::get('/config/dashboard',[ConfigController::class,'dashboard'])->name('config.dashboard');
 Route::get('/config/delete/{id}',[ConfigController::class,'delete'])->name('config.delete');
 Route::get('/config/detail/{id}',[ConfigController::class,'detail'])->name('config.edit');
 Route::put('/config/update/{id}',[ConfigController::class,'update'])->name('config.update');
@@ -84,3 +89,4 @@ Route::put('/config/update/{id}',[ConfigController::class,'update'])->name('conf
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
+Route::get('get-excel', [FileController::class, 'invoke']);

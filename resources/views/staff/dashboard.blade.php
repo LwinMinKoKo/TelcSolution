@@ -4,14 +4,12 @@
 @section('content')
 <div class="container">
 
-	{{ $staffinfos->links() }}
-
-
-	<!-- @if(session('info'))
+	@if(session('info'))
 	<div class="alert alert-info">
 		{{ session('info') }}
 	</div>
-	@endif -->
+	@endif
+  
   <a class="btn sm btn-primary" href="/staff/create" > +  Add New Staff</a><br><br>
 <table class="table table-bordered">
 
@@ -42,8 +40,9 @@
       <td>{{$staffinfo->phone}}</td>
       <td>{{$staffinfo->remark}}</td>
       <td>{{$staffinfo->address}}</td>
-     <td><a class="btn sm btn-primary" href="/staff/detail/{{$staffinfo->id}}">Edit</a>
-     <a class="btn sm btn-danger" href="/staff/delete/{{$staffinfo->id}}">Delete</a> 
+     <td>
+      <a class="btn sm btn-primary" href="/staff/detail/{{$staffinfo->id}}">Edit</a>
+      <a class="btn sm btn-danger" href="/staff/delete/{{$staffinfo->id}}">Delete</a> 
     
     </td>
     

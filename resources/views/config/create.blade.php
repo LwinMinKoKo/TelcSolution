@@ -4,8 +4,11 @@
 
 
 
-<form method="get" >
+<form method="post" >
 @csrf
+
+<div class="container">
+
 @if($errors->any())
 		<div class="alert alert-warning">
 			
@@ -17,13 +20,12 @@
 
 		</div>
 		@endif
-<div class="container">
     <br>
     <div class="row" >
         <div class="col">
             
         
-            <h1 >Config Create</h1>
+            <h3 >Config Create</h3>
         </div>
         
     </div>
@@ -31,8 +33,8 @@
         <div class= "row" >
 
         <div class="col-md-6">
-                <lable class="form-label">Order ID</lable>
-                <input type="text" class="form-control" name="order_id">
+                <lable class="form-label">Config Data</lable>
+                <input type="text" class="form-control" name="configkey">
             </div>
 
             <div class="col-md-6">
@@ -48,26 +50,31 @@
 
             <div class="col-md-6">
                 <lable class="form-label">Status</lable>
-                <input type="text" class="form-control" name="status">
+                <select class="form form-select" name="isActive" id="isActive">
+                    <option value="1" name="isActive" id="1">
+                    Active
+                    </option>
+                    <option value="1" name="isActive" id="2">
+                    Inactive
+                    </option>
+                </select>
+                <!-- <input type="text" class="form-control" name="isActive"> -->
             </div>
    
 
             <div class="col-md-6">
                 <lable class="form-label">Remark </lable>
-                <input type="remark" class="form-control" name="remark">
+                <input type="text" class="form-control" name="remark">
             </div>
 
         </div>  
-       
-
-    
 
     <div class="row justify-content-md-center ">
         <div class="col-md-3">
                
             <br>
             <button class="btn btn-success" type="submit"> Submit</button>
-            <button class="btn btn-secondary" type="reset">Reset</button>
+            <button class="btn btn-secondary" type="reset">Clear</button>
         </div>
         
     </div>

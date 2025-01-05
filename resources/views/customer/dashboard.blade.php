@@ -12,7 +12,7 @@
 		{{ session('info') }}
 	</div>
 	@endif -->
-  <a class="btn sm btn-primary" href="/customer/create" >Add New Customer  +</a><br><br>
+  <a class="btn sm btn-primary" href="/customer/create" > + Add New Customer</a><br><br>
 
   <table class="table  table-responsive">
 
@@ -48,11 +48,13 @@
       <th scope="row">{{$customer->id}}</th>
       <td>{{$customer->customer_id}}</td>
       <td>{{$customer->name}}</td>
+      <td>{{$customer->phone}}</td>
       <td>{{$customer->Staff->name}}</td>
-      <td>{{$customer->Staff->name}}</td><!-- product Nmae -->
+      <td>product</td><!-- product Nmae -->
       <td>{{$customer->geo_location}}</td>
-      <td>{{$customer->phone}}</td>
-      <td>{{$customer->phone}}</td>
+      <td>Bandwidth</td>
+      <td>$30</td>
+     
       <!--<td>{{$customer->geo_location}}</td>Bandwidth
       <td>{{$customer->geo_location}}</td> Active Months  
       <td>{{$customer->Staff->name}}</td>Collection status  
@@ -60,18 +62,15 @@
       <td>{{$customer->customer_id}}</td> Target Collection Amount 
       <td>{{$customer->customer_id}}</td>Collected Admount 
       <td>{{$customer->phone}}</td> Balance  -->
-      <td>{{$customer->phone}}</td>
+    
     
       <td>No : {{$customer->house_no}}, {{$customer->street}} Road, {{$customer->ward}} Ward, {{$customer->township}} Township,
           {{$customer->city}} City, {{$customer->village_ward}} Village Ward,  {{$customer->village}} Village
       </td>
      <td>
-      
-     
-    
-     
-      <a class="btn  btn-primary" href="/customer/detail">Edit</a>
-      <a class="btn  btn-danger" href="/customer/delete">Delete</a> 
+
+     <a class="btn sm btn-primary" href="/customer/detail/{{$customer->id}}">Edit</a>
+      <a class="btn sm btn-danger" href="/customer/delete/{{$customer->id}}">Delete</a> 
     
     </td>
     

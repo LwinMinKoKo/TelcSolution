@@ -9,49 +9,38 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function dashboard()
-    {
-       $product=Product::latest()->paginate(15);
-       return view('product/dashboard',['products'=>$product]);
-
-    }
     
 
     public function create()
-    {
-
-
-      
-        $validate=validator(request()->all(),
+    {               
+        $validator=validator(request()->all(),
         [
             'name'=>"required",
             'bandwidth'=>"required",
             'promotion'=>"required",
-            'status'=>"required",
+            'isActive'=>"required",
             'price'=>'required',
 
         ]);
 
        
-        if($validate->fails())
+        if($validator->fails())
         {
-            // print("request fail stagee");
-            return view("product/create")->with("Request Fail");
+            
+            return view('product/create')->withErrors($validator);
         }
-       
+        else
+        {
+            $product=new Product;
+            $product->name=request()->name;
+            $product->bandwidth=request()->bandwidth;
+            $product->promotion=request()->promotion;
+            $product->price=request()->price;
+            $product->isActive=request()->isActive;
+            $product->save();
+            return redirect('product/dashboard')->with('info',"New Product Created !");
 
-        $product=new Product;
-        $product->name=request()->name;
-        $product->bandwidth=request()->bandwidth;
-        $product->promotion=request()->promotion;
-        $product->price=request()->price;
-        $product->isActive=request()->status;
-        $product->save();
-        
-        return redirect('product/dashboard');
-        
-
-        // print("Product  Create Controller Worked");
+        }
     }
 
     public function detail($id)
@@ -63,38 +52,48 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
        
-       
-        //print("produt update controller worked !" . $request . $id);
-        $validate=$request->validate(
+        $validator=validator($request->all(),
         [
-            
+            'id'=>'required',
             'name'=>"required",
             'bandwidth'=>"required",
             'promotion'=>"required",
-            'status'=>"required",
+            'isActive'=>"required",
+            'price'=>"required",
 
         ]);
-        if($validate=null){
-           return redirect("product/detail")->with("Request fails");
+        if($validator->fails())
+        {
+            return back()->withErrors($validator);
         }
+        
+        
 
         $product=Product::find($id);
-       
         $product->name=request()->name;
         $product->bandwidth=request()->bandwidth;
         $product->promotion=request()->promotion;
-        $product->isActive=request()->status;
-        $product->update();
-         // print($product);
-        return redirect('product/dashboard');
+        $product->isActive=request()->isActive;
+        $product->price=request()->price;
+        $result=$product->update();
+        return redirect('product/dashboard')
+        ->with('info'," Successfully Update");
+
+       
     }
 
 
+    public function dashboard()
+    {
+       $product=Product::latest()->paginate(15)->where('isActive',"=","1");
+       return view('product/dashboard',['products'=>$product]);
+
+    }
     public function delete($id)
     {
         $product=Product::find($id);
         $product->delete();
 
-        return back();
+        return back()->with('info',"Deleted ! ");
     }
 }

@@ -12,8 +12,5 @@ class Customer extends Model
         return $this->belongsTo(Customer::class)->withDefault(['staff_id'=>"Default Staff"]);
     }
 
-    public function config()
-    {
-        return $this->belongsTo(Config::class);
-    }
+   
 }

@@ -42,10 +42,12 @@ class StaffController extends Controller
   
 
  public function create()
+ 
     {
 
-      // print("staff controller create worked !");
-      $validator=validator(request()->all(),[
+   
+      $validator=validator(request()->all(),
+      [
 
         'name'=>'required',
         'email'=>'required',
@@ -59,11 +61,11 @@ class StaffController extends Controller
       ]);
       if($validator->fails())
       {
-        
-        // print("fail");
-        return view('staff.create');
+        return back()->withErrors($validator);
       }    
         
+      else
+      {
                 $staff= new Staff;
                 $staff->config_id=1;
                 $staff->name=request()->name;
@@ -74,10 +76,9 @@ class StaffController extends Controller
                 $staff->remark=request()->remark;
                 $staff->address=request()->address;
                 $staff->save();
-            
+        return redirect('staff/dashboard')->with("info","New Staff Create Successfully");
 
-        return redirect('staff/dashboard');
-    
+      }
     }
     
 
@@ -112,7 +113,8 @@ class StaffController extends Controller
 
     public function update(Request $request,$id)
     {      
-        $validator=$request->validate([
+        $validator=validator($request->all(),
+        rules: [
               'id'=>'required',
               'name'=>'required',
               'email'=>'required',
@@ -123,35 +125,29 @@ class StaffController extends Controller
               'address'=>'required',
 
         ]);
-       
-       
-                  
-              
-                    $staff=Staff::find($id);
-                    $staff->name=$request->name;
-                    $staff->email=$request->email;
-                    $staff->phone=$request->phone;
-                    $staff->designation=$request->designation;
-                    $staff->department=$request->department;
-                    $staff->remark=$request->remark;
-                    $staff->address=$request->address;
-                    $result=$staff->update();
-                
-    if($result)
-    {
-      return redirect('staff/dashboard')->with("update Successully");
-    }
-       
-    else
-    {
-      return back();
-    }
-        //  print("update controller worked".$id);
+        if($validator->fails())
+        {
+          return back()->withErrors($validator);
+        }
+        else
+        {
+          $staff=Staff::find($id);
+          $staff->name=$request->name;
+          $staff->email=$request->email;
+          $staff->phone=$request->phone;
+          $staff->designation=$request->designation;
+          $staff->department=$request->department;
+          $staff->remark=$request->remark;
+          $staff->address=$request->address;
+          $staff->update();
+          return redirect('staff/dashboard')->with('info',"Update Successully");
+        }
+
     }
 
     public function dashboard()
     {
-        $data=Staff::latest()->paginate(15);
+        $data=Staff::latest()->paginate(15)->where('isActive',"=",0);
         return view('staff/dashboard',['staffinfos'=>$data]);
     }
 
@@ -160,7 +156,7 @@ class StaffController extends Controller
     {
         $data=Staff::find($id);
         $data->delete();
-        return back();
+        return back()->with("info","Deleted");
     }
 
 

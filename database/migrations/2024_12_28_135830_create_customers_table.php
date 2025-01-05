@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('customer_id');
             $table->string('name');
-            $table->string('phone');
-            $table->string('status');
+            $table->integer('phone');
+            $table->string('status');// need to update
             $table->string('house_no'); 
             $table->string('street');
             $table->string('ward');

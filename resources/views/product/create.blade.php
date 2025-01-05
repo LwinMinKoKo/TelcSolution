@@ -4,21 +4,21 @@
 
 
 
-<form method="post" >
+<form method="post">
 @csrf
-@if($errors->any())
-		<div class="alert alert-warning">
-			
-			<ol>
-				@foreach($errors->all() as $error)
-				<li>{{ $error }}</li>
-				@endforeach
-			</ol>
 
-		</div>
-		@endif
 <div class="container">
-    <br>
+@if ($errors->any())
+<div class="alert alert-warning">
+    <ol>
+        @foreach ($errors->all() as $error )
+        <li>{{$error}}</li>
+        @endforeach 
+    </ol>
+</div>
+@endif
+
+  
     <div class="row" >
         <div class="col">
             
@@ -46,9 +46,17 @@
             </div>
 
             <div class="col-md-6">
-                <lable class="form-label">Status </lable>
+                <lable class="form-label">Status</lable>
+                <select name="isActive" id="isActive" class="form form-select">
+                    <option value="1" name="isActive" >
+                        Active
+                    </option>
+                    <option value="0" name="isActive" >
+                        Inactive
+                    </option>
+                </select>
 
-                <input type="text" class="form-control" name="status"   >
+               <!-- <input type="integer" class="form-control" name="isActive"  min="0" max="1" > -->
                  
   
             </div>
@@ -77,7 +85,7 @@
         <div class="col-md-2">
                
                <br>
-        <a href="/product/dashboard"><h6>Product Lists</h6></a>
+        <a href="/product/dashboard"><h6>Product Lists</h6></a> 
         </div>
         
     </div>
