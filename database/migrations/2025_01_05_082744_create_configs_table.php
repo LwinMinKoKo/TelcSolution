@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('description');
             $table->integer('isActive');
             $table->string('remark');
+            // $table->integer('staff_id');
+            // $table->integer('customer_id');
             $table->timestamps();
         });
     }

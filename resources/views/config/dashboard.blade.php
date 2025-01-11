@@ -36,7 +36,7 @@
       <td>{{$config->configkey}}</td>
       <td>{{$config->name}}</td>
       <td>{{$config->description}}</td>
-      
+      <td>{{$config->remark}}</td>
       <td>
       @if ($config->isActive == 1)
       Active
@@ -44,9 +44,10 @@
       Inactive
       @endif
       </td>
-      <td>{{$config->reamerk}}</td>
-     <td><a class="btn sm btn-primary" href="/config/detail/{{$config-> id}}">Edit</a>
-     <a class="btn sm btn-danger" href="/config/delete/{{$config-> id}}">Delete</a> 
+      
+     <td>
+      <a class="btn sm btn-primary" href="/config/detail/{{$config-> id}}">Edit</a>
+      <a class="btn sm btn-danger" href="/config/delete/{{$config-> id}}">Delete</a> 
     
     </td>
     
@@ -56,6 +57,6 @@
 
 @endforeach
 </table>
-
+{{$configs->links()}}
 @endsection
 

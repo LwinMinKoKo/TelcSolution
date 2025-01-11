@@ -15,7 +15,7 @@ return new class extends Migration
          {
             $table->id();
             $table->integer('customer_id');
-            $table->string('target_collection_month');//***** spelling */
+            $table->string('target_collection_month');
             $table->integer('target_collection_amount');
             $table->string('collected_month');
             $table->integer('collected_amount');

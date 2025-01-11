@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+// use Illuminate\Pagination\Paginator;
 
 class ProductController extends Controller
 {
@@ -85,9 +86,9 @@ class ProductController extends Controller
 
     public function dashboard()
     {
-       $product=Product::latest()->paginate(15)->where('isActive',"=","1");
+       $product=Product::latest()->paginate(5);
        return view('product/dashboard',['products'=>$product]);
-
+    //    ->;
     }
     public function delete($id)
     {

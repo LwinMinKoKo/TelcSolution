@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('department');
             $table->string('remark');
             $table->string('address');
-            $table->string('config_id');
+            $table->integer('isActive');
+            // $table->string('config_id');
             $table->timestamps();
         });
     }

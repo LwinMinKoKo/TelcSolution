@@ -147,7 +147,8 @@ class StaffController extends Controller
 
     public function dashboard()
     {
-        $data=Staff::latest()->paginate(15)->where('isActive',"=",0);
+        $data=Staff::latest()->paginate(5);
+       
         return view('staff/dashboard',['staffinfos'=>$data]);
     }
 

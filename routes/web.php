@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -9,7 +10,7 @@ use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Config\ConfigController;
 use App\Http\Controllers\File\FileController;
-
+use App\Http\Controllers\Purchase\PurchaseController;
 
 
 Route::get('/', function () {
@@ -58,7 +59,7 @@ Route::put('/product/update/{id}',[ProductController::class,'update'])->name('pr
 /** Start of Customer Route */
 
 Route::post('/customer/create',[CustomerController::class,'create'])->name('customer.create');
-Route::get('/customer/create',[CustomerController::class,'staffdata','isactive'])->name('customer.createdata');
+Route::get('/customer/create',[CustomerController::class,'staffdata',])->name('customer.createdata');
 
 
 Route::get('/customer/dashboard',[CustomerController::class,'dashboard'])->name('customer.index');
@@ -83,10 +84,32 @@ Route::put('/config/update/{id}',[ConfigController::class,'update'])->name('conf
 
 /** End of Config Route */
 
-// Route::get('staff/create',[DataconfigController::class,'staffConfigdata']);
+
+/** Start of Purchase Route */
+
+Route::get('/purchase/create',[PurchaseController::class,'dataload','create'])
+->name('purchase.dataload');
+
+Route::post('/purchase/create',[PurchaseController::class,'store'])
+->name('purchase.store');
+
+
+Route::get('/purchase/dashboard',[PurchaseController::class,'dashboard'])
+->name('purchase.dashboard');
+
+Route::get('/purchase/detail/{id}',[PurchaseController::class,'detail'])
+->name('purchase.detail');
+Route::put('/purchase/update/{id}',[PurchaseController::class,'update'])
+->name('purchase.update');
+
+/** End of Purchase Route */
+
 // Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 Route::get('get-excel', [FileController::class, 'invoke']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

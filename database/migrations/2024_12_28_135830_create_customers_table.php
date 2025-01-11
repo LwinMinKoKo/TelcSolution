@@ -16,17 +16,19 @@ return new class extends Migration
             $table->integer('customer_id');
             $table->string('name');
             $table->integer('phone');
-            $table->string('status');// need to update
+            $table->string('email');
+            $table->string('isActive');// need to update
             $table->string('house_no'); 
             $table->string('street');
             $table->string('ward');
             $table->string('township');
             $table->string('city');
-            $table->string('village_ward');
-            $table->string('village');         
+            $table->string('village_ward')->nullable();
+            $table->string('village')->nullable();         
             $table->string('geo_location');
             $table->integer('config_id');
             $table->integer(column: 'staff_id');
+            $table->integer(column: 'product_id');
             $table->timestamps();
         });
     }

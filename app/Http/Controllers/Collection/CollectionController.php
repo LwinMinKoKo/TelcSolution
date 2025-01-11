@@ -28,7 +28,7 @@ class CollectionController extends Controller
    public function dashboard()
    {
 
-    $data=Colllection::all()->where('isActive');
+    $data=Colllection::where('isActive')->latest()->paginate(15);
    return view('collection/dashboard',['collections'=>$data]);
     
    

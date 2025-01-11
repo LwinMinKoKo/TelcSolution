@@ -75,6 +75,6 @@
 @endforeach
 
 </table>
-
+{{ $collections->links() }}
 @endsection
 

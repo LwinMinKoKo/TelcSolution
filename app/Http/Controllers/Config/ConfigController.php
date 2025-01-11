@@ -44,7 +44,7 @@ class ConfigController extends Controller
 
     public function dashboard()
     {
-        $data=Config::all();
+        $data=Config::latest()->paginate(5);
         return view('config.dashboard',['configs'=>$data]);
     }
 

@@ -51,7 +51,8 @@
   </tbody>
 
 @endforeach
-</table>
 
+</table>
+{{$staffinfos->links()}}
 @endsection
 

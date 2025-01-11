@@ -43,7 +43,7 @@
             </div>
             <div class="col-md-6">
                 <lable class="form-label">Phone</lable>
-                <input type="phone" class="form-control" name="phone" maxlength="11" minlength="11">
+                <input type="interger" class="form-control" name="phone"  max="11">
             </div>
 
             <div class="col-md-6">

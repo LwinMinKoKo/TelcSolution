@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title','Purchase Suspend')
+@section('title','purchase detail')
 @section('content')
 
 
-<form method="post" action="{{url('purchase/suspend/' . $purchases->id)}}">
+<form method="post" action="{{url('purchase/update/'.$purchases->id)}}">
 @method('put')
 @csrf
 
@@ -11,32 +11,32 @@
 
 
 <div class="container">
-@if ($errors->any())
-<div class="alert alert-warning">
-    <ol>
-        @foreach ($errors->all() as $error )
-        <li>{{$error}}</li>
-        @endforeach 
-    </ol>
-</div>
+
+@if($errors->any())
+
+    <div class="alert alert-warning">
+        <ol>
+            @foreach($errors->all() as $error)
+            <li>{{$error}}</li>
+            @endforeach
+        </ol>
+    </div>
+
 @endif
     <br>
     <div class="row" >
-        <div class="col">
-            
-        
-            <h1 >Purchase Suspend</h1>
+        <div class="col">  
+            <h1 >Purchase Edit</h1>
         </div>
         
     </div>
- 
   
-
     <div class= "row" >
 
     
 <div class="col-md-6">
     <lable class="form-label">Customer Name</lable>
+    <input type="text">
     <select class="form form-select" name="customer_id" id="customer_id">
         @foreach ($customers as $customer )
         <option value="{{$customer->id}}">
@@ -68,7 +68,7 @@
     <lable class="form-label">End Date </lable>
     <input type="date" class="form-control" name="end_date">
 </div>
-<!-- 
+
 <div class="col-md-6">
     <lable class="form-label">Service Months</lable>
     <select class="form form-select" name="service_months" id="service_months">
@@ -79,7 +79,7 @@
         @endforeach
     </select>
     
-</div> -->
+</div>
 
 <div class="col-md-6">
     <lable class="form-label">Payment Method</lable>
@@ -118,7 +118,34 @@
 </div>
 
 
+<div class="col-md-6">
+    <lable class="form-label">Terminate </lable>
+    <select class="form form-select" name="isTerminate" id="isTerminate">
+        <option value="0">
+            No
+        </option>
+        <option value="1">
+            Terminate
+        </option>
+     </select>
+</div>
 
+<div class="col-md-6">
+    <lable class="form-label">Terminate </lable>
+    <select class="form form-select" name="isSuspend" id="isSuspend">
+        <option value="0">
+            No
+        </option>
+        <option value="1">
+            Suspend
+        </option>
+     </select>
+</div>
+
+<div class="col-md-6">
+    <lable class="form-label">Suspend Days </lable>
+    <input type="integer" name="suspend_days" class="form form-control" min="1">
+</div>
 
 <div class="col-md-6">
     <lable class="form-label">Remark </lable>
@@ -127,9 +154,11 @@
 
 </div>  
 
+
+
     <div class="row justify-content-md-center ">
         <div class="col-md-3">
-            <br><br>
+            
             <button class="btn btn-success" type="submit" > Update</button>
             <button class="btn btn-secondary" type="reset">Reset</button>
         </div>
@@ -140,7 +169,7 @@
         <div class="col-md-2">
                
                <br>
-        <a href="/purchase/dashboard"><h6>Purchase Lists</h6></a>
+        <a href="/staff/dashboard"><h6>Staff Lists</h6></a>
         </div>
         
     </div>

@@ -3,18 +3,14 @@
 
 @section('content')
 <div class="container">
-
-	
-
-
-	<!-- @if(session('info'))
+	@if(session('info'))
 	<div class="alert alert-info">
 		{{ session('info') }}
 	</div>
-	@endif -->
+	@endif
   <a class="btn sm btn-primary" href="/customer/create" > + Add New Customer</a><br><br>
 
-  <table class="table  table-responsive">
+<table class="table  table-responsive">
 
   <thead>
    
@@ -24,18 +20,15 @@
       <th scope="col">Name</th>
       <th scope="col">Phone</th>
       <th scope="col">Service Staff</th>
+
       <th scope="col">Product</th>
-      <th scope="col">Map</th>
-      <th scope="col">Bandwidth</th>
+     
+      <th scope="col">Bandwidth : MBps</th>
       <th scope="col">Price</th>
-      <!-- <th scope="col">Active Month</th>
-      <th scope="col">Collection status</th>
-      <th scope="col">Collection Months</th>
-      <th scope="col">Target Collecttion Amount</th>
-      <th scope="col">Collected Amount</th>
-      <th scope="col">Balance Amount</th> -->
+      <th scope="col">Map</th>
       <th scope="col">Address</th>
       <th scope="col">Action</th>
+      <th scope="col"></th>
 
     </tr>
   </thead>
@@ -50,36 +43,37 @@
       <td>{{$customer->name}}</td>
       <td>{{$customer->phone}}</td>
       <td>{{$customer->Staff->name}}</td>
-      <td>product</td><!-- product Nmae -->
+      <td>{{$customer->product->name}}</td>
+      <td>{{$customer->Product->bandwidth}}</td>
+      <td>{{$customer->Product->price}}</td>  
       <td>{{$customer->geo_location}}</td>
-      <td>Bandwidth</td>
-      <td>$30</td>
-     
-      <!--<td>{{$customer->geo_location}}</td>Bandwidth
-      <td>{{$customer->geo_location}}</td> Active Months  
-      <td>{{$customer->Staff->name}}</td>Collection status  
-      <td>{{$customer->customer_id}}</td>Collecton Months  
-      <td>{{$customer->customer_id}}</td> Target Collection Amount 
-      <td>{{$customer->customer_id}}</td>Collected Admount 
-      <td>{{$customer->phone}}</td> Balance  -->
-    
-    
-      <td>No : {{$customer->house_no}}, {{$customer->street}} Road, {{$customer->ward}} Ward, {{$customer->township}} Township,
-          {{$customer->city}} City, {{$customer->village_ward}} Village Ward,  {{$customer->village}} Village
-      </td>
-     <td>
 
-     <a class="btn sm btn-primary" href="/customer/detail/{{$customer->id}}">Edit</a>
-      <a class="btn sm btn-danger" href="/customer/delete/{{$customer->id}}">Delete</a> 
-    
-    </td>
-    
+      <td>
+        No : {{$customer->house_no}}, {{$customer->street}} Road, {{$customer->ward}} Ward,
+        {{$customer->township}} Township, {{$customer->city}} City, {{$customer->village_ward}} Village Ward, 
+        {{$customer->config->name}} Village
+      </td>
+      
+      <!-- <td>
+        No : {{$customer->house_no}}, {{$customer->street}} Road, {{$customer->ward}} Ward,
+        {{$customer->township}} Township,{{$customer->city}} City, {{$customer->village_ward}} Village Ward, 
+        {{$customer->Config->description}} Village
+      </td> -->
+
+      <td>
+        <a class="btn sm btn-primary" href="/customer/detail/{{$customer->id}}">Edit</a>
+      </td>  
+     
+      <td>
+        <a class="btn sm btn-danger" href="/customer/delete/{{$customer->id}}">Delete</a>     
+      </td>
+
     </tr>
     
   </tbody>
 
 @endforeach
 </table>
-
+{{ $customers->links() }}
 @endsection
 
