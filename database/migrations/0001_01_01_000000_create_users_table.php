@@ -15,9 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->integer('role_id'); // 0 Admin , 1 for normal user,   2 for Manager , 
+            $table->integer('isActive')->nullable();//0 for Inactive , 1 for Active 
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+
             $table->timestamps();
         });
 

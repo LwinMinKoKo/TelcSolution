@@ -249,8 +249,10 @@
         <div class="row justify-content-md-center ">
         <div class="col-md-3">
             <br><br>
+            @can('delete')
             <button class="btn btn-success" type="submit" > Update</button>
             <button class="btn btn-secondary" type="reset">Reset</button>
+            @endcan
         </div>
         
     </div>

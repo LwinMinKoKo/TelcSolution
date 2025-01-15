@@ -61,12 +61,21 @@
 
             <div class="col-md-6">
                 <lable class="form-label">Status</lable>
-                <select class="form form-select" name="isActive" id="isActive"
-                value="{{$configs->isActive}}" >
+                <select class="form form-select" name="isActive" id="isActive" >
+                    <option value="{{$configs->isActive}}">
+                    @if ($configs->isActive==0)
+                    Current : Inactive
+                    @elseif($configs->isActive==1)
+                    Current : Active
+                    @else
+                    Something Wrong ! 
+                    @endif
+                    <hr>
+                    </option>
                     <option value="1" name="isActive" id="1">
                     Active
                     </option>
-                    <option value="1" name="isActive" id="2">
+                    <option value="0" name="isActive" id="2">
                     Inactive
                     </option>
                 </select>

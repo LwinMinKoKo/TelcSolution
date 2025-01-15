@@ -11,6 +11,7 @@ use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Config\ConfigController;
 use App\Http\Controllers\File\FileController;
 use App\Http\Controllers\Purchase\PurchaseController;
+use App\Http\Controllers\User\UserController;
 
 
 Route::get('/', function () {
@@ -46,7 +47,7 @@ Route::put('/staff/update/{id}',[StaffController::class,'update'])->name('staff.
 
 /** Start of product Route */
 
-Route::post('/product/create',[ProductController::class,'create'])->name('product.create');
+Route::post('/product/create',[ProductController::class,'store'])->name('product.store');
 Route::get('/product/create',[ProductController::class,'create'])->name('product.create');
 Route::get('/product/dashboard',[ProductController::class,'dashboard'])->name('product.index');
 Route::get('/product/delete/{id}',[ProductController::class,'delete'])->name('product.delete');
@@ -104,12 +105,24 @@ Route::put('/purchase/update/{id}',[PurchaseController::class,'update'])
 
 /** End of Purchase Route */
 
-// Auth::routes();
+
+
+/** Start of custom user Route */
+
+route::get('/user/dashboard',[UserController::class,'dashboard']);
+route::get('/user/detail/{id}',[UserController::class,'detail']);
+route::put('/user/detail/{id}',[UserController::class,'update']);
+route::get('/user/delete/{id}',[UserController::class,'delete']);
+
+/** End of custom user Route */
+
+
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 Route::get('get-excel', [FileController::class, 'invoke']);
-Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -8,7 +8,8 @@
 @csrf
 
 <div class="container">
-@if ($errors->any())
+
+@if($errors->any())
 <div class="alert alert-warning">
     <ol>
         @foreach ($errors->all() as $error )
@@ -17,12 +18,10 @@
     </ol>
 </div>
 @endif
-
-  
+  <br>
     <div class="row" >
         <div class="col">
-            
-        
+
             <h1 >Product Create</h1>
         </div>
         
@@ -42,7 +41,16 @@
             </div>
             <div class="col-md-6">
                 <lable class="form-label">Promotion</lable>
-                <input type="text" class="form-control" name="promotion">
+
+                <select name="promotion_id" id="promotion_id" class="form form-select">
+                   @foreach ($configs as $config )
+                   @if ($config->name=="Promotion")
+                   <option value="{{$config->configkey}}">{{$config->description}}</option>
+                   @endif
+                   
+                   @endforeach 
+                </select>
+              
             </div>
 
             <div class="col-md-6">
@@ -63,7 +71,7 @@
             <div class="col-md-6">
                 <lable class="form-label">Price </lable>
 
-                <input type="text" class="form-control" name="price"   >
+                <input type="integer" class="form-control" name="price"   >
                  
   
             </div>
@@ -72,7 +80,8 @@
    
 
     <div class="row justify-content-md-center ">
-        <div class="col-md-3">
+     
+    <div class="col-md-3">
                
             <br>
             <button class="btn btn-success" type="submit"> Submit</button>

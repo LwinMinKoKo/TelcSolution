@@ -9,19 +9,22 @@
 		{{ session('info') }}
 	</div>
 	@endif
-
+@can('only-admin')
   <a class="btn sm btn-primary" href="/config/create" > + Add New Config </a><br><br>
+  @endcan
+
+  <h3>Config Lists</h3>
 <table class="table table-bordered">
 
-  <thead>
+<thead>
    
     <tr>
       <th scope="col">No</th>
       <th scope="col">Config_ID</th>
       <th scope="col">Name</th>
       <th scope="col">Description</th>
-      <th scope="col">Status</th>
       <th scope="col">Remark</th>
+      <th scope="col">Status</th>
       <th scope="col">Action</th>
 
     </tr>
@@ -44,13 +47,14 @@
       Inactive
       @endif
       </td>
-      
+    
      <td>
+     @can('only-admin')
       <a class="btn sm btn-primary" href="/config/detail/{{$config-> id}}">Edit</a>
       <a class="btn sm btn-danger" href="/config/delete/{{$config-> id}}">Delete</a> 
-    
+      @endcan
     </td>
-    
+   
     </tr>
     
   </tbody>

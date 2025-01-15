@@ -7,10 +7,17 @@ use App\Models\Staff;
 use App\Models\Config;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Config\DataconfigController;
+use Illuminate\Support\Facades\Gate;
+use App\Models\Policies\CustomerPolicy;
 
 class StaffController extends Controller
 {  
+  public function __construct()
+  {
+    $this->middleware('auth')->except(['dashboard']);
+  }
 
+ 
  public function configdata()
  {
   $designationData=[
@@ -44,7 +51,7 @@ class StaffController extends Controller
  public function create()
  
     {
-
+      Gate::authorize('create-all');
    
       $validator=validator(request()->all(),
       [
@@ -56,6 +63,8 @@ class StaffController extends Controller
         'department'=>'required',
         'remark'=>'required',
         'address'=>'required',
+        'isActive'=>'required',
+        // 'user_id'=>'required',
         
 
       ]);
@@ -66,16 +75,17 @@ class StaffController extends Controller
         
       else
       {
-                $staff= new Staff;
-                $staff->config_id=1;
-                $staff->name=request()->name;
-                $staff->email=request()->email;
-                $staff->phone=request()->phone;
-                $staff->designation=request()->designation;
-                $staff->department=request()->department;
-                $staff->remark=request()->remark;
-                $staff->address=request()->address;
-                $staff->save();
+                $staffs= new Staff;
+                $staffs->name=request()->name;
+                $staffs->email=request()->email;
+                $staffs->phone=request()->phone;
+                $staffs->designation=request()->designation;
+                $staffs->department=request()->department;
+                $staffs->remark=request()->remark;
+                $staffs->address=request()->address;
+                $staffs->isActive=request()->isActive;
+                // $staffs->user_id=request()->user_id;we will develop for userlog
+                $staffs->save();
         return redirect('staff/dashboard')->with("info","New Staff Create Successfully");
 
       }
@@ -84,7 +94,7 @@ class StaffController extends Controller
 
     public function detail($id)
     {
-        
+      Gate::authorize('update-all');
         $data=Staff::find($id);
         $designationData=[
           ['designation_id'=>'1','desname'=>"Bill Collector"],
@@ -106,7 +116,9 @@ class StaffController extends Controller
               ['dept_id'=>'5','deptname'=>"Bill"],
           
             ];
-        return view('staff.detail',['staffinfos'=>$data,'designations'=>$designationData,'departments'=>$deptData]);      
+            $statuss=Config::all()->where('isActive','=','1');
+        return view('staff.detail',['staffinfos'=>$data,'designations'=>$designationData,
+        'departments'=>$deptData,'statuss'=>$statuss]);      
           
     }
   
@@ -123,6 +135,8 @@ class StaffController extends Controller
               'department'=>'required',
               'remark'=>'required',
               'address'=>'required',
+              'isActive'=>'required',
+              // 'user_id'=>'required',
 
         ]);
         if($validator->fails())
@@ -131,15 +145,17 @@ class StaffController extends Controller
         }
         else
         {
-          $staff=Staff::find($id);
-          $staff->name=$request->name;
-          $staff->email=$request->email;
-          $staff->phone=$request->phone;
-          $staff->designation=$request->designation;
-          $staff->department=$request->department;
-          $staff->remark=$request->remark;
-          $staff->address=$request->address;
-          $staff->update();
+          $staffs=Staff::find($id);
+          $staffs->name=$request->name;
+          $staffs->email=$request->email;
+          $staffs->phone=$request->phone;
+          $staffs->designation=$request->designation;
+          $staffs->department=$request->department;
+          $staffs->remark=$request->remark;
+          $staffs->address=$request->address;
+          $staffs->isActive=$request->isActive;
+          // $staffs->user_id=$request->user_id;
+          $staffs->update();
           return redirect('staff/dashboard')->with('info',"Update Successully");
         }
 
@@ -155,9 +171,13 @@ class StaffController extends Controller
 
     public function delete($id)
     {
+
+      Gate::authorize('delete-all');
+
         $data=Staff::find($id);
         $data->delete();
-        return back()->with("info","Deleted");
+        return back()->with("info","Deleted")->with('info',"Deleted !");
+   
     }
 
 

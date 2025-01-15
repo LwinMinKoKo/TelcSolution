@@ -11,6 +11,11 @@ use App\Models\Product;
 class PurchaseController extends Controller
 {
 
+    public function __construct()
+    {
+      $this->middleware('auth')->except(['dashboard']);
+    }
+  
     public function create()
     {
         return redirect('/purchase/create');

@@ -12,9 +12,12 @@
 
 
 @endif
-
+@can('create-all')
 	  <a class="btn sm btn-primary" href="/product/create" > +  Add New Product</a><br><br>
-<table class="table table-bordered">
+@endcan
+
+<h3>Product Lists </h3>
+    <table class="table table-bordered">
 
   <thead>
    
@@ -41,13 +44,33 @@
       <th scope="row">{{$product->id}}</th>
       <td>{{$product->name}}</td>
       <td>{{$product->bandwidth}}</td>
-      <td>{{$product->promotion}}</td>
-      <td>{{$product->isActive}}</td>
+      <td>
+        @foreach ($configs as $config )
+        @if ($config->name=="Promotion" and
+         $config->configkey==$product->promotion_id )
+        {{$config->description}}
+        @endif
+        
+        @endforeach
+      
+    </td>
+      <td>
+        @if ($product->isActive==0)
+        Inactive
+        @elseif($product->isActive==1)
+        Active
+        @else
+        Something Wrong !
+        @endif
+      </td>
       <td>{{$product->price}}</td>
-   
+   @can('update-all')
      <td><a class="btn sm btn-primary" href="/product/detail/{{$product->id}}">Edit</a>
+  @endcan
+  
+  @can('delete-all')   
      <a class="btn sm btn-danger" href="/product/delete/{{$product->id}}">Delete</a> 
-    
+  @endcan
     </td>
     
     </tr>

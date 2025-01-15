@@ -43,7 +43,7 @@
             </div>
             <div class="col-md-6">
                 <lable class="form-label">Phone</lable>
-                <input type="interger" class="form-control" name="phone"  max="11">
+                <input type="text" class="form-control" name="phone"  maxlength="11">
             </div>
 
             <div class="col-md-6">
@@ -67,20 +67,30 @@
 				@endforeach
 			</select>
             </div>
-
+            
             <div class="col-md-6">
                 <lable class="form-label">Remark </lable>
                 <input type="remark" class="form-control" name="remark">
             </div>
+            <div class="col-md-6">
+                <label  class="form-label"> isActive </label>
+                <select name="isActive" id="isActive" class="form form-select">
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
+                    
+                </select>
+            </div>
 
-        </div>  
+           
+
+          
        
     <div class="row-md-12">
         <lable class="form-label"> Address</lable>
         <input type="text" class="form-control" name="address">
         <br>
     </div> 
-    
+    </div>  
 
     <div class="row justify-content-md-center ">
         <div class="col-md-3">

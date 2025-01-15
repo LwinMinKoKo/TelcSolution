@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->integer('phone');
+            $table->string('phone');
             $table->string('designation');
             $table->string('department');
             $table->string('remark');
             $table->string('address');
             $table->integer('isActive');
+            $table->integer('user_id')->nullable();
             // $table->string('config_id');
             $table->timestamps();
         });

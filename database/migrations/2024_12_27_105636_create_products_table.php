@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('bandwidth');
-            $table->string('promotion');
+            $table->integer('promotion_id')->nullable();
             $table->integer('isActive');
             $table->integer('price');
             $table->timestamps();

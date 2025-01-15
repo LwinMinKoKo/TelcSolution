@@ -8,8 +8,9 @@
 		{{ session('info') }}
 	</div>
 	@endif
+  @can('create-all')
   <a class="btn sm btn-primary" href="/customer/create" > + Add New Customer</a><br><br>
-
+  @endcan
 <table class="table  table-responsive">
 
   <thead>
@@ -27,9 +28,10 @@
       <th scope="col">Price</th>
       <th scope="col">Map</th>
       <th scope="col">Address</th>
+      @can('delete')
       <th scope="col">Action</th>
       <th scope="col"></th>
-
+      @endcan
     </tr>
   </thead>
 
@@ -59,15 +61,18 @@
         {{$customer->township}} Township,{{$customer->city}} City, {{$customer->village_ward}} Village Ward, 
         {{$customer->Config->description}} Village
       </td> -->
-
+@can('update-all')
       <td>
+
         <a class="btn sm btn-primary" href="/customer/detail/{{$customer->id}}">Edit</a>
-      </td>  
-     
+      </td> 
+@endcan      
+      
+@can('delete-all')   
       <td>
         <a class="btn sm btn-danger" href="/customer/delete/{{$customer->id}}">Delete</a>     
       </td>
-
+@endcan
     </tr>
     
   </tbody>

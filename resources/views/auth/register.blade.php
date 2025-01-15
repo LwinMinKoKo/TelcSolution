@@ -25,6 +25,25 @@
                             </div>
                         </div>
 
+
+
+                        <div class="row mb-3">
+                        <label for="role_id" class="col-md-4 col-form-label text-md-end">{{ __('role_id') }}</label>
+                        <div class="col-md-6">
+                            <select class="form form-select" name="role_id" id="role_id">
+                                <option value="1">choose one...</option>
+                                <option value="0">Admin</option>
+                                <option value="1">Normal</option>
+                                <option value="2">Manager</option>
+                            </select>
+        
+                            </div>
+                        </div>
+
+                   
+                       
+                        
+
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 

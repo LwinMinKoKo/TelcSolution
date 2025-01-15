@@ -25,7 +25,8 @@ return new class extends Migration
             $table->string('city');
             $table->string('village_ward')->nullable();
             $table->string('village')->nullable();         
-            $table->string('geo_location');
+            // $table->string('geo_location');
+            $table->geography('geo_location', subtype: 'point', srid: 4326);
             $table->integer('config_id');
             $table->integer(column: 'staff_id');
             $table->integer(column: 'product_id');
