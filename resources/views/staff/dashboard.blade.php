@@ -34,10 +34,11 @@
     </tr>
   </thead>
 
-  @foreach($staffinfos as $staffinfo)
+  
 
 
-     <tbody>
+     <tbody class="table-group-divider">
+     @foreach($staffinfos as $staffinfo)
     <tr>
       <th scope="row">{{$staffinfo->id}}</th>
       <td>{{$staffinfo->name}}</td>

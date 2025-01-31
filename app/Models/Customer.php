@@ -11,7 +11,7 @@ class Customer extends Model
     {
         return $this->belongsTo(Staff::class)->withDefault(['staff_id'=>"Default Staff"]);
     }
-
+    
     public function product()
     {
     return $this->belongsTo(Product::class)->withDefault(['product_id'=>"Default Product"]);

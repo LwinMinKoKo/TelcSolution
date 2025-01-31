@@ -6,6 +6,8 @@
 
 <form method="post" >
 @csrf
+
+<div class="container">
 @if($errors->any())
 		<div class="alert alert-warning">
 			
@@ -17,7 +19,6 @@
 
 		</div>
 @endif
-<div class="container">
     <br>
     <div class="row" >
         <div class="col">
@@ -60,16 +61,18 @@
                 <input type="email" class="form-control" name="email">
             </div>
 
+
             <div class="col-md-6">
                 <lable class="form-label">Status</lable>
-                <!-- <input type="text" class="form-control" name="status"> -->
-                 <select  class="form-select" name="isActive" id="isActive">
-                    @foreach ($isactives as $isactive )
-                    <option value="{{$isactive['status_id']}}">
-                        {{$isactive['status_name']}}
-                    </option>
+                <select  class="form form-select" name="isActive" id="isActive">
+                    @foreach ($configs as $config )
+                        @if ($config->name == "isActive")
+                        <option value="{{ $config->configkey }}">
+                            {{$config->description}}
+                        </option>
+                        @endif
                     @endforeach
-                 </select>
+                </select>
             </div>
 
             <div class="col-md-6">
@@ -92,7 +95,6 @@
 
             <div class="col-md-6">
                 <lable class="form-label">Product Plan</lable>
-                <!-- <input type="text" class="form-control" name="product_id"> -->
                  <select name="product_id" id="product_id" class="form form-select">
                  @foreach ($products as $product )
                  @if($product->isActive==1)
@@ -208,7 +210,6 @@
 
             <div class="col-md-6">
                 <lable class="form-label">Village</lable>
-                <!-- <input type="text" class="form-control" name="village"> -->
                 <select class="form form-select" name="village" value="village" id="village" disabled>
                     @foreach ($configs as $config)
                     @if ($config->name === "Village" and $config->isActive==1)

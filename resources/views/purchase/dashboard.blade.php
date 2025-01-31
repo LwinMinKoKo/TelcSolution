@@ -12,7 +12,9 @@
 	@endif
   <a class="btn sm btn-primary" href="/purchase/create" > + Add New Purchase</a><br><br>
   <!-- <div style="overflow-x:auto;"> -->
-<table class="table table-bordered">
+
+  <h3>Purchase Lists</h3>
+<table class="table table-striped">
 
   <thead>
    
@@ -27,21 +29,23 @@
       <th scope="col">Payment Methods</th>
       <th scope="col">Payment Frequent</th>
       <th scope="col">isActive</th>
-      <th scope="col">isSuspended</th>
+      <th scope="col">is Suspend ?</th>
       <th scope="col">Total Suspended Duation</th>
+      <th scope="col">isTernimate ?</th>
       <th scope="col">Remark</th>
       <th scope="col" colspan="2" >Action</th>
       
       
 
     </tr>
-  </thead>
+  </thead class="table-group-divider">
 
-  @foreach($purchases as $purchase)
+  
 
 
-     <tbody>
-    <tr>
+     <tbody class="table-group-divider">
+     @foreach($purchases as $purchase)
+    <tr class="table-primary">
       <th scope="row">{{$purchase->id}}</th>
       <td>{{$purchase->Customer->customer_id}}</td>
       <td>{{$purchase->Customer->name}}</td>
@@ -75,29 +79,38 @@
       </td>
 
       <td>
-          @if($purchase->isSuspend == null)
-
+          @if($purchase->isSuspend == 0)
+          No
           @elseif ($purchase->isSuspend == 1)
           Suspended
-          @else($purchase->isActive == 0)
-          No
+          @else($purchase->isSuspend == null)
+          Null Value
           @endif
       </td>
 
       <td>{{$purchase->suspend_days}}</td>
+
+      <td>
+          @if($purchase->isTerminated   == 0)
+          No
+          @elseif ($purchase->isTerminated == 1)
+          Ternimate
+          @else($purchase->isTerminated == null)
+          Null Value
+          @endif
+      </td>
       <td>{{$purchase->remark}}</td>
 
       <td >
-        <a class="badge text-bg-success"href="/purchase/suspend/{{$purchase->id}}">Suspend</a>
+        <a class="badge text-bg-success"href="/purchase/detail/{{$purchase->id}}">details</a>
        
-     
-      
-        <a class="badge text-bg-danger" href="/purchase/ternimate/{{$purchase->id}}">Ternimate</a>     
-       </td>
+        <!-- <a class="badge text-bg-primary" href="/collection/add-collection/1">Collection</a>    -->
+          
+       
        <td>
-        <a class="badge text-bg-primary" href="/collection/edit/">Collection</a>     
+         
       
-        <a class="badge text-bg-info" href="/purchase/detail/{{$purchase->id}}">Edit</a>     
+       
       
       </td>
 

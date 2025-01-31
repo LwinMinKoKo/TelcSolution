@@ -36,7 +36,7 @@
   
 
 
-  <tbody>
+  <tbody class="table-group-divider">
  
     <tr>
     @foreach ($products as $product )

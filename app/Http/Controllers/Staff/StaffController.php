@@ -14,7 +14,7 @@ class StaffController extends Controller
 {  
   public function __construct()
   {
-    $this->middleware('auth')->except(['dashboard']);
+    $this->middleware('auth');
   }
 
  

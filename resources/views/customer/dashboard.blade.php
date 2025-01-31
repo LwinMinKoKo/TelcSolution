@@ -11,8 +11,9 @@
   @can('create-all')
   <a class="btn sm btn-primary" href="/customer/create" > + Add New Customer</a><br><br>
   @endcan
-<table class="table  table-responsive">
-
+<table class="table">
+<h3>Customer Lists</h3>
+<br>
   <thead>
    
     <tr>
@@ -21,24 +22,26 @@
       <th scope="col">Name</th>
       <th scope="col">Phone</th>
       <th scope="col">Service Staff</th>
-
       <th scope="col">Product</th>
-     
       <th scope="col">Bandwidth : MBps</th>
       <th scope="col">Price</th>
       <th scope="col">Map</th>
+      <th scope="col">Status</th>
       <th scope="col">Address</th>
-      @can('delete')
-      <th scope="col">Action</th>
-      <th scope="col"></th>
+      @can('delete-all')
+      <th scope="col" >Action</th>
       @endcan
+
     </tr>
   </thead>
 
-  @foreach($customers as $customer)
+  
 
 
-     <tbody>
+     <tbody class="table-group-divider">
+
+     @foreach($customers as $customer)
+     
     <tr>
       <th scope="row">{{$customer->id}}</th>
       <td>{{$customer->customer_id}}</td>
@@ -49,6 +52,15 @@
       <td>{{$customer->Product->bandwidth}}</td>
       <td>{{$customer->Product->price}}</td>  
       <td>{{$customer->geo_location}}</td>
+      <td>
+        @if ($customer->isActive == 0)
+        Inactive
+        @else($customer->isAcives == 1)
+        Active
+
+        @endif
+      
+      </td>
 
       <td>
         No : {{$customer->house_no}}, {{$customer->street}} Road, {{$customer->ward}} Ward,

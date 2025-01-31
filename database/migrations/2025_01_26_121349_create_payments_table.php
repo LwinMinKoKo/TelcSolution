@@ -11,27 +11,27 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('colllections', function (Blueprint $table)
-         {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->integer('customer_id');
-            $table->string('target_collection_months');
+            $table->integer('installment_id');
+            $table->date('target_collection_months');
             $table->integer('target_collection_amount');
-            $table->string('collected_month');
+            $table->date('collected_months');
             $table->integer('collected_amount');
             $table->integer('active_balance');
             $table->integer('collected_status');
-            $table->integer('collected_date');
+            $table->integer('purchase_id');
             $table->integer('isActive');
             $table->timestamps();
         });
-    }    
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('colllections');
+        Schema::dropIfExists('payments');
     }
 };

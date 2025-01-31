@@ -4,22 +4,22 @@
 
 
 <form method="post" action="{{url('customer/update/'. $customers->id)}}">
-
+@method('put')
+@csrf  
 
 <div class="container">
     @if ($errors->any())
-    
-        <ul>@foreach ($errors->all() as $error )</ul>
+    <div class="alert alert-warning">
+    <ul>
+        @foreach ($errors->all() as $error )
+    </ul>
         <li>
             {{$error}}
         </li>
-        
         @endforeach
-    
-    
+    </div>
     @endif
-@method('put')
-@csrf  
+
     <br>
     <div class="row" >
         <div class="col-md-6">
@@ -56,14 +56,12 @@
 
         <div class="col-md-6">
             <lable class="form-label">Status</lable>
-            <!-- <input type="text" class="form-control" name="customer_id" value="{{ $customers->customer_id }} ">
-            -->
             <select class="form-select"  name="isActive" id="isActive" value="{{$customers->isActive}}">
             <option value="{{$customers->isActive}}">
                 @if ($customers->isActive==1)
-                Active
+                Current : Active
                 @else($customers->isActive==0)
-                Inactive
+                Current : Inactive
                 @endif
           
             <hr>
@@ -97,11 +95,13 @@
             <lable class="form-label">Map Location</lable>
             <input type="text" class="form-control" name="geo_location" value="{{ $customers->geo_location }}">
         </div>
+
+     
+
         <div class="col-md-6">
                 <lable class="form-label">Product Plan</lable>
-                <!-- <input type="text" class="form-control" name="product_id"> -->
                  <select name="product_id" id="product_id" class="form form-select">
-                      
+               
                  <option value="{{$customers->product_id}}">
                  {{$customers->Product->name}}
                 </option>

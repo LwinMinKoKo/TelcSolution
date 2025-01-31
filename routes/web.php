@@ -1,6 +1,8 @@
 <?php
 
 
+use App\Http\Controllers\Payment\PaymentController;
+use App\Models\Payment;
 use Illuminate\Support\Facades\Route;
 
 
@@ -12,6 +14,8 @@ use App\Http\Controllers\Config\ConfigController;
 use App\Http\Controllers\File\FileController;
 use App\Http\Controllers\Purchase\PurchaseController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Installment\InstallmentController;
+
 
 
 Route::get('/', function () {
@@ -33,12 +37,9 @@ Route::post('/collection/add-collection/{id}',[CollectionController::class,'coll
 
 Route::post('/staff/create',[StaffController::class,'create'])->name('staff.create');
 Route::get('/staff/create',[StaffController::class,'configdata'])->name('staff.config');
-
 Route::get('/staff/dashboard',[StaffController::class,'dashboard'])->name('staff.index');
 Route::get('/staff/delete/{id}',[StaffController::class,'delete'])->name('staff.delete');
 Route::get('/staff/detail/{id}',[StaffController::class,'detail'])->name('staff.edit');
-
-
 Route::get('/staff/show/{id}',[StaffController::class,'show'])->name('staff.show');   
 Route::put('/staff/update/{id}',[StaffController::class,'update'])->name('staff.update');
 
@@ -59,10 +60,8 @@ Route::put('/product/update/{id}',[ProductController::class,'update'])->name('pr
 
 /** Start of Customer Route */
 
-Route::post('/customer/create',[CustomerController::class,'create'])->name('customer.create');
-Route::get('/customer/create',[CustomerController::class,'staffdata',])->name('customer.createdata');
-
-
+Route::post('/customer/create',[CustomerController::class,'store'])->name('customer.store');
+Route::get('/customer/create',[CustomerController::class,'create',])->name('customer.create');
 Route::get('/customer/dashboard',[CustomerController::class,'dashboard'])->name('customer.index');
 Route::get('/customer/delete/{id}',[CustomerController::class,'delete'])->name('customer.delete');
 Route::get('/customer/detail/{id}',[CustomerController::class,'detail'])->name('customer.edit');
@@ -94,13 +93,13 @@ Route::get('/purchase/create',[PurchaseController::class,'dataload','create'])
 Route::post('/purchase/create',[PurchaseController::class,'store'])
 ->name('purchase.store');
 
-
 Route::get('/purchase/dashboard',[PurchaseController::class,'dashboard'])
 ->name('purchase.dashboard');
 
 Route::get('/purchase/detail/{id}',[PurchaseController::class,'detail'])
 ->name('purchase.detail');
-Route::put('/purchase/update/{id}',[PurchaseController::class,'update'])
+
+Route::put('/purchase/detail/{id}',[PurchaseController::class,'update'])
 ->name('purchase.update');
 
 /** End of Purchase Route */
@@ -121,8 +120,25 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
+/** excel input route */
 Route::get('get-excel', [FileController::class, 'invoke']);
+/** end of excel input  */
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+/** Start of Installment Route */
+
+Route::get('installment/dashboard',[InstallmentController::class,'dashboard']);
+
+/** End of Installment Route */
+
+
+
+/** Start of Pyament Route */
+
+Route::get('payment/create/{id}',[PaymentController::class,'create'])->name('payment.create');
+Route::post('payment/create/{id}',[PaymentController::class,'store']);
+Route::get('payment/dashboard',[PaymentController::class,'dashboard']);
+
+/** End of Payment Route */

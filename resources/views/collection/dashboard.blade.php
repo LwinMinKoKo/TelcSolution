@@ -22,7 +22,7 @@
    
     <a>
       <th scope="col">No</th>
-      <th scope="col">Customer ID</th>
+      <th scope="col">Customer</th>
       <th scope="col">Terget Collection Months</th>
       <th scope="col">Target Collection Amount</th>
       <th scope="col">Collected Months</th>
@@ -36,14 +36,17 @@
     </tr>
   </thead>
 
-  @foreach($collections as $collection)
+  
 
 
-     <tbody>
+     <tbody class="table-group-divider">
+
+     @foreach($collections as $collection)
+     
     <tr>
       <th scope="row">{{$collection->id}}</th>
    <td> <a href="/customer/dashboard/">{{$collection->customer_id}}</a></td>
-      <td>{{$collection->target_collection_month}}</td>
+      <td>{{$collection->installment  ->target_collection_months}}</td>
       <td>{{$collection->target_collection_amount}}</td> 
       <td>{{$collection->collected_month}}</td>
       <td>{{$collection->collected_amount}}</td>

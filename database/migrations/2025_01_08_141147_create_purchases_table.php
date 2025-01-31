@@ -13,18 +13,19 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->integer("customer_id");
-            $table->integer("product_id");
-            $table->integer("service_months");
-            $table->integer("payment_method");
-            $table->integer("payment_term");
+            $table->integer('customer_id');
+            $table->integer('purchase_id');
+            $table->integer('service_months');
+            $table->string('payment_method');
+            $table->integer('payment_term');
             $table->date('start_date');
-            $table->date("end_date");
-            $table->integer("isActive");
-            $table->integer('isSuspend')->nullable();
-            $table->integer('suspend_days')->nullable();
-            $table->boolean('ternamite');
-            $table->string("reamrk");
+            $table->date('end_date');
+            $table->integer('isActive');
+            $table->integer('total_amount');
+            $table->date('isSuspend')->nullable();
+            $table->date('suspend_days')->nullable();
+            $table->integer('isTerminated')->nullable();
+            $table->string('remark')->nullable();
             $table->timestamps();
         });
     }

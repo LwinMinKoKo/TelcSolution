@@ -35,12 +35,6 @@ class CollectionController extends Controller
     $data=Colllection::where('isActive')->latest()->paginate(15);
    return view('collection/dashboard',['collections'=>$data]);
     
-   
-  //  dd($data);
-   
-      
-    
-    //print("dashoard controller worked !");
    }
 
    public function create()

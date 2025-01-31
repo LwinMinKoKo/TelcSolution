@@ -12,7 +12,7 @@ class ConfigController extends Controller
 { 
    public function __construct()
   {
-    $this->middleware('auth')->except(['dashboard']);
+    $this->middleware('auth');
   }
 
     public function create()
@@ -63,7 +63,7 @@ class ConfigController extends Controller
 
     public function dashboard()
     {
-        $data=Config::latest()->paginate(5);
+        $data=Config::latest()->paginate(10);
         return view('config.dashboard',['configs'=>$data]);
     }
 

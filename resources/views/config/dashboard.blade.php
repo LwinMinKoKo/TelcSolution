@@ -20,7 +20,7 @@
    
     <tr>
       <th scope="col">No</th>
-      <th scope="col">Config_ID</th>
+      <th scope="col">Config Key ID</th>
       <th scope="col">Name</th>
       <th scope="col">Description</th>
       <th scope="col">Remark</th>
@@ -30,10 +30,13 @@
     </tr>
   </thead>
 
-  @foreach($configs as $config)
+  
 
 
-     <tbody>
+     <tbody class="table-group-divider">
+     
+     @foreach($configs as $config)
+
     <tr>
       <th scope="row">{{$config->id}}</th>
       <td>{{$config->configkey}}</td>

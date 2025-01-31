@@ -41,6 +41,8 @@
                     <a class="navbar-brand" href="{{ url('/purchase/create') }}">Purchase</a>
                     <a class="navbar-brand" href="{{ url('/user/dashboard') }}">User</a>
                     <a class="navbar-brand" href="{{ url('/collection/dashboard') }}">Collection</a>
+                    <a class="navbar-brand" href="{{ url('/installment/dashboard') }}">Installment</a>
+                    <a class="navbar-brand" href="{{ url('/payment/dashboard') }}">Payment</a>
                     <a class="navbar-brand" href="{{ url('/config/dashboard') }}">Config</a>
                         <!-- Authentication Links -->
                         @guest

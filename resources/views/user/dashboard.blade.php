@@ -46,9 +46,9 @@
         
         <td>
             @foreach ($isactives as $isactive )
-                @if ($user->isActive==$isactive['status_id'])
-                {{$isactive['desc']}}            
-                @endif
+                @if ($user->isActive == $isactive['status_id'] )
+                {{$isactive['desc']}} 
+            @endif
             @endforeach
         </td>
         

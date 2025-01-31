@@ -14,4 +14,11 @@ class Purchase extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function installments()
+    {
+        return $this->hasMany(Installment::class);
+    }
+
+   
 }
